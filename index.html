@@ -1,0 +1,933 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>be1.ru</title>
+</head>
+<body>
+<p>&lt;!doctype html&gt;</p>
+
+<p>&lt;html lang=&quot;ru&quot;&gt;</p>
+
+<p>&lt;head&gt;</p>
+
+<p>&lt;meta charset=&quot;utf-8&quot; /&gt;</p>
+
+<p>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot; /&gt;</p>
+
+<p>&lt;title&gt;Ачивкaр &mdash; журнал жизни по ачивкам&lt;/title&gt;</p>
+
+<p>&lt;style&gt;</p>
+
+<p>:root{</p>
+
+<p>--bg:#0f1724; --card:#0b1220; --accent:#6ee7b7; --muted:#94a3b8; --glass: rgba(255,255,255,0.03);</p>
+
+<p>--maxw:980px;</p>
+
+<p>font-family: Inter, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial;</p>
+
+<p>color: #e6eef8;</p>
+
+<p>}</p>
+
+<p>body{margin:0; background:linear-gradient(180deg,#071024 0%, #08182a 60%); min-height:100vh; display:flex; align-items:flex-start; justify-content:center; padding:28px;}</p>
+
+<p>.wrap{width:100%; max-width:var(--maxw);}</p>
+
+<p>header{display:flex; align-items:center; gap:16px; margin-bottom:18px;}</p>
+
+<p>.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#60a5fa); display:flex;align-items:center;justify-content:center;font-weight:700;color:#022;box-shadow:0 6px 18px rgba(6,8,23,0.6);}</p>
+
+<p>h1{font-size:20px;margin:0}</p>
+
+<p>p.lead{margin:0;color:var(--muted); font-size:13px;}</p>
+
+<p>.grid{display:grid; grid-template-columns: 1fr 360px; gap:18px;}</p>
+
+<p>.card{background:var(--card); border-radius:12px; padding:14px; box-shadow:0 6px 18px rgba(2,6,23,0.6);}</p>
+
+<p>.controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}</p>
+
+<p>input,select,textarea,button{font:inherit}</p>
+
+<p>.form-row{display:flex;gap:8px; margin-bottom:8px;}</p>
+
+<p>.form-row input,.form-row select{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:var(--glass);color:inherit}</p>
+
+<p>button{padding:8px 12px;border-radius:8px;border:0;background:linear-gradient(90deg,var(--accent),#60a5fa);color:#022;cursor:pointer}</p>
+
+<p>.muted{color:var(--muted); font-size:13px}</p>
+
+<p>.list{display:flex;flex-direction:column;gap:8px; max-height:56vh; overflow:auto;padding-right:6px;}</p>
+
+<p>.ach{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02)}</p>
+
+<p>.ach.done{opacity:0.6;text-decoration:line-through}</p>
+
+<p>.ach .left{flex:1}</p>
+
+<p>.meta{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted)}</p>
+
+<p>.small{font-size:12px;color:var(--muted)}</p>
+
+<p>.badges{display:flex;gap:8px;flex-wrap:wrap}</p>
+
+<p>.badge{padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:13px}</p>
+
+<p>.progress{height:12px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}</p>
+
+<p>.progress &gt; i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#60a5fa)}</p>
+
+<p>.topline{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px}</p>
+
+<p>.filters{display:flex;gap:8px;align-items:center}</p>
+
+<p>.actions{display:flex;gap:8px}</p>
+
+<p>.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}</p>
+
+<p>.stat{padding:10px;border-radius:8px;background:rgba(255,255,255,0.02);text-align:center}</p>
+
+<p>.center{display:flex;align-items:center;justify-content:center}</p>
+
+<p>@media (max-width:900px){</p>
+
+<p>.grid{grid-template-columns:1fr; }</p>
+
+<p>.logo{display:none}</p>
+
+<p>}</p>
+
+<p>/* tiny calendar */</p>
+
+<p>.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:12px}</p>
+
+<p>.cal-day{padding:6px;border-radius:6px;background:rgba(255,255,255,0.02);min-height:46px; display:flex;flex-direction:column;justify-content:space-between}</p>
+
+<p>.dot{width:8px;height:8px;border-radius:999px;background:var(--accent);margin-left:4px}</p>
+
+<p>.pill{padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:12px}</p>
+
+<p>/* tiny footer */</p>
+
+<p>footer{margin-top:14px;color:var(--muted);font-size:13px;text-align:center}</p>
+
+<p>.tiny{font-size:12px;color:var(--muted)}</p>
+
+<p>&lt;/style&gt;</p>
+
+<p>&lt;/head&gt;</p>
+
+<p>&lt;body&gt;</p>
+
+<p>&lt;div class=&quot;wrap&quot;&gt;</p>
+
+<p>&lt;header&gt;</p>
+
+<p>&lt;div class=&quot;logo&quot;&gt;АЧ&lt;/div&gt;</p>
+
+<p>&lt;div&gt;</p>
+
+<p>&lt;h1&gt;Ачивкaр &mdash; журнал жизни по ачивкам&lt;/h1&gt;</p>
+
+<p>&lt;p class=&quot;lead&quot;&gt;Фиксируй события, набирай очки, открывай бейджи и следи за прогрессом.&lt;/p&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;/header&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div class=&quot;grid&quot;&gt;</p>
+
+<p>&lt;div&gt;</p>
+
+<p>&lt;div class=&quot;card&quot;&gt;</p>
+
+<p>&lt;div class=&quot;topline&quot;&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot;&gt;Добавить ачивку&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;actions&quot;&gt;</p>
+
+<p>&lt;button id=&quot;btnExport&quot;&gt;Экспорт&lt;/button&gt;</p>
+
+<p>&lt;button id=&quot;btnImport&quot;&gt;Импорт&lt;/button&gt;</p>
+
+<p>&lt;input id=&quot;fileInput&quot; type=&quot;file&quot; accept=&quot;application/json&quot; style=&quot;display:none&quot; /&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div style=&quot;margin-bottom:8px&quot; id=&quot;addForm&quot;&gt;</p>
+
+<p>&lt;div class=&quot;form-row&quot;&gt;</p>
+
+<p>&lt;input id=&quot;title&quot; placeholder=&quot;Название (напр. &#39;Пробежать 5к&#39;)&quot; /&gt;</p>
+
+<p>&lt;select id=&quot;category&quot;&gt;</p>
+
+<p>&lt;option value=&quot;Фитнес&quot;&gt;Фитнес&lt;/option&gt;</p>
+
+<p>&lt;option value=&quot;Работа&quot;&gt;Работа&lt;/option&gt;</p>
+
+<p>&lt;option value=&quot;Учёба&quot;&gt;Учёба&lt;/option&gt;</p>
+
+<p>&lt;option value=&quot;Хобби&quot;&gt;Хобби&lt;/option&gt;</p>
+
+<p>&lt;option value=&quot;Отношения&quot;&gt;Отношения&lt;/option&gt;</p>
+
+<p>&lt;option value=&quot;Другое&quot;&gt;Другое&lt;/option&gt;</p>
+
+<p>&lt;/select&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;form-row&quot;&gt;</p>
+
+<p>&lt;input id=&quot;pts&quot; type=&quot;number&quot; placeholder=&quot;Очки (напр. 10)&quot; min=&quot;1&quot; value=&quot;10&quot; /&gt;</p>
+
+<p>&lt;input id=&quot;date&quot; type=&quot;date&quot; /&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;form-row&quot;&gt;</p>
+
+<p>&lt;input id=&quot;tags&quot; placeholder=&quot;Тэги через запятую (например: утро,ранок)&quot; /&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;form-row&quot; style=&quot;align-items:flex-start&quot;&gt;</p>
+
+<p>&lt;textarea id=&quot;desc&quot; placeholder=&quot;Короткое описание (необязательно)&quot; style=&quot;flex:1;padding:8px;border-radius:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);min-height:60px;&quot;&gt;&lt;/textarea&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div style=&quot;display:flex;gap:8px&quot;&gt;</p>
+
+<p>&lt;button id=&quot;add&quot;&gt;Добавить ачивку&lt;/button&gt;</p>
+
+<p>&lt;button id=&quot;addQuick&quot; style=&quot;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)&quot;&gt;Быстро (сегодня)&lt;/button&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;hr style=&quot;border:none;height:8px&quot; /&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div class=&quot;controls&quot;&gt;</p>
+
+<p>&lt;input id=&quot;search&quot; placeholder=&quot;Поиск по названию или тегам&quot; style=&quot;padding:8px;border-radius:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);flex:1&quot; /&gt;</p>
+
+<p>&lt;select id=&quot;filterCat&quot;&gt;</p>
+
+<p>&lt;option value=&quot;&quot;&gt;Все категории&lt;/option&gt;</p>
+
+<p>&lt;option&gt;Фитнес&lt;/option&gt;&lt;option&gt;Работа&lt;/option&gt;&lt;option&gt;Учёба&lt;/option&gt;&lt;option&gt;Хобби&lt;/option&gt;&lt;option&gt;Отношения&lt;/option&gt;&lt;option&gt;Другое&lt;/option&gt;</p>
+
+<p>&lt;/select&gt;</p>
+
+<p>&lt;select id=&quot;sortBy&quot;&gt;</p>
+
+<p>&lt;option value=&quot;new&quot;&gt;По дате (новые)&lt;/option&gt;</p>
+
+<p>&lt;option value=&quot;old&quot;&gt;По дате (старые)&lt;/option&gt;</p>
+
+<p>&lt;option value=&quot;pts&quot;&gt;По очкам&lt;/option&gt;</p>
+
+<p>&lt;/select&gt;</p>
+
+<p>&lt;button id=&quot;clearDone&quot; style=&quot;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)&quot;&gt;Очистить выполненные&lt;/button&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div class=&quot;list&quot; id=&quot;list&quot;&gt;&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div style=&quot;height:12px&quot;&gt;&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div class=&quot;card&quot;&gt;</p>
+
+<p>&lt;div style=&quot;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px&quot;&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot;&gt;Календарь (текущий месяц)&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;tiny&quot; id=&quot;monthLabel&quot;&gt;&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;calendar&quot; id=&quot;calendar&quot;&gt;&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;aside&gt;</p>
+
+<p>&lt;div class=&quot;card&quot;&gt;</p>
+
+<p>&lt;div style=&quot;display:flex;flex-direction:column;gap:8px&quot;&gt;</p>
+
+<p>&lt;div style=&quot;display:flex;align-items:center;justify-content:space-between&quot;&gt;</p>
+
+<p>&lt;div&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot;&gt;Текущие очки&lt;/div&gt;</p>
+
+<p>&lt;div style=&quot;font-weight:700;font-size:22px&quot; id=&quot;score&quot;&gt;0&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div style=&quot;width:140px&quot;&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot;&gt;Прогресс к следующему бейджу&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;progress&quot; style=&quot;margin-top:6px&quot;&gt;&lt;i id=&quot;prog&quot; style=&quot;width:10%&quot;&gt;&lt;/i&gt;&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot; style=&quot;margin-bottom:6px&quot;&gt;Бейджи&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;badges&quot; id=&quot;badges&quot;&gt;&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;hr style=&quot;border:none;height:8px&quot; /&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot;&gt;Статистика&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;stats-grid&quot; style=&quot;margin-top:8px&quot;&gt;</p>
+
+<p>&lt;div class=&quot;stat&quot;&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot;&gt;Ачивок всего&lt;/div&gt;</p>
+
+<p>&lt;div id=&quot;statTotal&quot; style=&quot;font-weight:700;font-size:18px&quot;&gt;0&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;stat&quot;&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot;&gt;Выполнено&lt;/div&gt;</p>
+
+<p>&lt;div id=&quot;statDone&quot; style=&quot;font-weight:700;font-size:18px&quot;&gt;0&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;stat&quot;&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot;&gt;Текущий стрик&lt;/div&gt;</p>
+
+<p>&lt;div id=&quot;statStreak&quot; style=&quot;font-weight:700;font-size:18px&quot;&gt;0&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;hr style=&quot;border:none;height:8px&quot; /&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot;&gt;Экспорт / импорт&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;tiny&quot; style=&quot;margin-top:6px&quot;&gt;Экспортирует все данные в JSON. Импорт восстанавливает их (перезапишет текущие данные).&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div style=&quot;height:12px&quot;&gt;&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div class=&quot;card&quot;&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot; style=&quot;margin-bottom:8px&quot;&gt;Быстрые действия&lt;/div&gt;</p>
+
+<p>&lt;div style=&quot;display:flex;flex-direction:column;gap:8px&quot;&gt;</p>
+
+<p>&lt;button id=&quot;quickRun&quot;&gt;+ Пробежка 5к (10 пт)&lt;/button&gt;</p>
+
+<p>&lt;button id=&quot;quickRead&quot;&gt;+ Читать 30 мин (8 пт)&lt;/button&gt;</p>
+
+<p>&lt;button id=&quot;resetBtn&quot; style=&quot;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)&quot;&gt;Сбросить все (удалит всё)&lt;/button&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div style=&quot;height:12px&quot;&gt;&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;div class=&quot;card&quot;&gt;</p>
+
+<p>&lt;div class=&quot;muted&quot;&gt;Советы&lt;/div&gt;</p>
+
+<p>&lt;ul class=&quot;tiny&quot; style=&quot;padding-left:16px;margin:8px 0 0 0;line-height:1.5;color:var(--muted)&quot;&gt;</p>
+
+<p>&lt;li&gt;Делай короткие ачивки &mdash; легче закрывать стрики.&lt;/li&gt;</p>
+
+<p>&lt;li&gt;Используй тэги (утро/вечер/работа) для фильтрации.&lt;/li&gt;</p>
+
+<p>&lt;li&gt;Экспортируй данные периодически для бэкапа.&lt;/li&gt;</p>
+
+<p>&lt;/ul&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;/aside&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;footer&gt;</p>
+
+<p>&lt;div class=&quot;tiny&quot;&gt;Сайт локальный &mdash; всё хранится в твоём браузере. Чтобы опубликовать: загрузи `index.html` на GitHub Pages или любой хост.&lt;/div&gt;</p>
+
+<p>&lt;/footer&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>&lt;script&gt;</p>
+
+<p>/* Простая реализация: данные в localStorage */</p>
+
+<p>const LS_KEY = &#39;achievkar_v1&#39;;</p>
+
+<p>function uid(){ return &#39;id_&#39;+Math.random().toString(36).slice(2,9); }</p>
+
+<p>function todayISO(){ const d=new Date(); return d.toISOString().slice(0,10); }</p>
+
+<p>const badgeRules = [</p>
+
+<p>{id:&#39;starter&#39;, title:&#39;Новичок&#39;, need:20, desc:&#39;Набрать 20 очков&#39;},</p>
+
+<p>{id:&#39;active&#39;, title:&#39;Активный&#39;, need:100, desc:&#39;Набрать 100 очков&#39;},</p>
+
+<p>{id:&#39;veteran&#39;, title:&#39;Ветеран&#39;, need:500, desc:&#39;Набрать 500 очков&#39;},</p>
+
+<p>{id:&#39;streak7&#39;, title:&#39;Стрик 7&#39;, need:7, kind:&#39;streak&#39;, desc:&#39;Выполнять хотя бы 1 ачивку 7 дней подряд&#39;}</p>
+
+<p>];</p>
+
+<p>&nbsp;</p>
+
+<p>let state = { items: [], score:0, badges:[], createdAt: new Date().toISOString() };</p>
+
+<p>&nbsp;</p>
+
+<p>/* load / save */</p>
+
+<p>function load(){</p>
+
+<p>try{</p>
+
+<p>const raw = localStorage.getItem(LS_KEY);</p>
+
+<p>if(raw){ state = JSON.parse(raw); }</p>
+
+<p>}catch(e){ console.error(e); }</p>
+
+<p>}</p>
+
+<p>function save(){</p>
+
+<p>state.updatedAt = new Date().toISOString();</p>
+
+<p>localStorage.setItem(LS_KEY, JSON.stringify(state));</p>
+
+<p>}</p>
+
+<p>&nbsp;</p>
+
+<p>/* util */</p>
+
+<p>function parseTags(str){ return str.split(&#39;,&#39;).map(s=&gt;s.trim()).filter(Boolean); }</p>
+
+<p>function formatDate(d){ if(!d) return &#39;&#39;; return d; }</p>
+
+<p>&nbsp;</p>
+
+<p>/* core: add, toggle, remove */</p>
+
+<p>function addItem({title,desc,category,tags,pts,date}){</p>
+
+<p>const it = { id: uid(), title, desc, category, tags, pts:+pts, date:date||todayISO(), done:false, createdAt:new Date().toISOString() };</p>
+
+<p>state.items.push(it); recalc(); save(); render();</p>
+
+<p>}</p>
+
+<p>function toggleDone(id){</p>
+
+<p>const it = state.items.find(x=&gt;x.id===id);</p>
+
+<p>if(!it) return;</p>
+
+<p>it.done = !it.done;</p>
+
+<p>if(it.done){ state.score = (state.score||0)+ (it.pts||0); }</p>
+
+<p>else{ state.score = Math.max(0,(state.score||0) - (it.pts||0)); }</p>
+
+<p>recalcBadges();</p>
+
+<p>save(); render();</p>
+
+<p>}</p>
+
+<p>function removeItem(id){</p>
+
+<p>state.items = state.items.filter(x=&gt;x.id!==id); recalc(); save(); render();</p>
+
+<p>}</p>
+
+<p>function clearDone(){</p>
+
+<p>state.items = state.items.filter(x=&gt;!x.done); save(); render();</p>
+
+<p>}</p>
+
+<p>function recalc(){</p>
+
+<p>state.score = state.items.filter(x=&gt;x.done).reduce((s,i)=&gt;s+i.pts,0);</p>
+
+<p>recalcBadges();</p>
+
+<p>}</p>
+
+<p>&nbsp;</p>
+
+<p>/* badges */</p>
+
+<p>function recalcBadges(){</p>
+
+<p>const earned = new Set(state.badges||[]);</p>
+
+<p>// points-based</p>
+
+<p>for(const r of badgeRules.filter(r=&gt;!r.kind)){</p>
+
+<p>if((state.score||0) &gt;= r.need) earned.add(r.id);</p>
+
+<p>else earned.delete(r.id);</p>
+
+<p>}</p>
+
+<p>// streak</p>
+
+<p>const streak = computeStreak();</p>
+
+<p>if(streak &gt;= 7) earned.add(&#39;streak7&#39;); else earned.delete(&#39;streak7&#39;);</p>
+
+<p>state.badges = Array.from(earned);</p>
+
+<p>}</p>
+
+<p>&nbsp;</p>
+
+<p>/* stats &amp; streak */</p>
+
+<p>function computeStreak(){</p>
+
+<p>// count consecutive days up to today with at least one done item</p>
+
+<p>const doneDates = new Set(state.items.filter(i=&gt;i.done).map(i=&gt;i.date));</p>
+
+<p>let s=0; let d=new Date();</p>
+
+<p>while(true){</p>
+
+<p>const iso = d.toISOString().slice(0,10);</p>
+
+<p>if(doneDates.has(iso)){ s++; d.setDate(d.getDate()-1); }</p>
+
+<p>else break;</p>
+
+<p>}</p>
+
+<p>return s;</p>
+
+<p>}</p>
+
+<p>&nbsp;</p>
+
+<p>/* export / import */</p>
+
+<p>function exportJSON(){</p>
+
+<p>const blob = new Blob([JSON.stringify(state, null, 2)], {type:&#39;application/json&#39;});</p>
+
+<p>const url = URL.createObjectURL(blob);</p>
+
+<p>const a = document.createElement(&#39;a&#39;);</p>
+
+<p>a.href = url; a.download = &#39;achievkar_export.json&#39;; a.click();</p>
+
+<p>URL.revokeObjectURL(url);</p>
+
+<p>}</p>
+
+<p>function importJSON(file){</p>
+
+<p>const reader = new FileReader();</p>
+
+<p>reader.onload = e=&gt;{</p>
+
+<p>try{</p>
+
+<p>const data = JSON.parse(e.target.result);</p>
+
+<p>// basic validation</p>
+
+<p>if(!data.items) return alert(&#39;Неверный файл импорта&#39;);</p>
+
+<p>if(!confirm(&#39;Импорт перезапишет текущие данные. Продолжить?&#39;)) return;</p>
+
+<p>state = data; save(); render();</p>
+
+<p>}catch(err){ alert(&#39;Ошибка чтения файла&#39;); }</p>
+
+<p>};</p>
+
+<p>reader.readAsText(file);</p>
+
+<p>}</p>
+
+<p>&nbsp;</p>
+
+<p>/* render */</p>
+
+<p>function render(){</p>
+
+<p>// list</p>
+
+<p>const list = document.getElementById(&#39;list&#39;); list.innerHTML=&#39;&#39;;</p>
+
+<p>const q = document.getElementById(&#39;search&#39;).value.trim().toLowerCase();</p>
+
+<p>const cat = document.getElementById(&#39;filterCat&#39;).value;</p>
+
+<p>const sort = document.getElementById(&#39;sortBy&#39;).value;</p>
+
+<p>&nbsp;</p>
+
+<p>let items = state.items.slice();</p>
+
+<p>if(q){</p>
+
+<p>items = items.filter(i =&gt; i.title.toLowerCase().includes(q) || (i.tags||[]).join(&#39; &#39;).toLowerCase().includes(q) || (i.desc||&#39;&#39;).toLowerCase().includes(q));</p>
+
+<p>}</p>
+
+<p>if(cat) items = items.filter(i=&gt;i.category===cat);</p>
+
+<p>if(sort===&#39;new&#39;) items.sort((a,b)=&gt;new Date(b.createdAt)-new Date(a.createdAt));</p>
+
+<p>if(sort===&#39;old&#39;) items.sort((a,b)=&gt;new Date(a.createdAt)-new Date(b.createdAt));</p>
+
+<p>if(sort===&#39;pts&#39;) items.sort((a,b)=&gt;b.pts - a.pts);</p>
+
+<p>&nbsp;</p>
+
+<p>for(const it of items){</p>
+
+<p>const el = document.createElement(&#39;div&#39;); el.className=&#39;ach&#39;+(it.done?&#39; done&#39;:&#39;&#39;);</p>
+
+<p>el.innerHTML = `</p>
+
+<p>&lt;div style=&quot;display:flex;gap:10px;align-items:center&quot;&gt;</p>
+
+<p>&lt;input type=&quot;checkbox&quot; ${it.done?&#39;checked&#39;:&#39;&#39;} data-id=&quot;${it.id}&quot; /&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;left&quot;&gt;</p>
+
+<p>&lt;div style=&quot;display:flex;justify-content:space-between;align-items:center&quot;&gt;</p>
+
+<p>&lt;div style=&quot;font-weight:600&quot;&gt;${escapeHtml(it.title)}&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;muted small&quot;&gt;${escapeHtml(it.category)} &middot; ${it.pts} пт&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div class=&quot;meta&quot; style=&quot;margin-top:6px&quot;&gt;</p>
+
+<p>&lt;div class=&quot;small&quot;&gt;${escapeHtml(it.desc||&#39;&#39;)}&lt;/div&gt;</p>
+
+<p>&lt;div style=&quot;margin-left:auto&quot;&gt;${formatDate(it.date)}&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div style=&quot;margin-top:6px&quot; class=&quot;small&quot;&gt;${(it.tags||[]).map(t=&gt;`&lt;span class=&quot;pill&quot;&gt;${escapeHtml(t)}&lt;/span&gt;`).join(&#39; &#39;)}&lt;/div&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>&lt;div style=&quot;display:flex;flex-direction:column;gap:6px;margin-left:8px&quot;&gt;</p>
+
+<p>&lt;button data-action=&quot;remove&quot; data-id=&quot;${it.id}&quot; style=&quot;background:transparent;border:0;color:var(--muted)&quot;&gt;Удалить&lt;/button&gt;</p>
+
+<p>&lt;/div&gt;</p>
+
+<p>`;</p>
+
+<p>// events</p>
+
+<p>el.querySelector(&#39;input[type=checkbox]&#39;).addEventListener(&#39;change&#39;, (e)=&gt;{ toggleDone(it.id); });</p>
+
+<p>el.querySelector(&#39;[data-action=remove]&#39;).addEventListener(&#39;click&#39;, ()=&gt;{ if(confirm(&#39;Удалить ачивку?&#39;)) removeItem(it.id); });</p>
+
+<p>list.appendChild(el);</p>
+
+<p>}</p>
+
+<p>&nbsp;</p>
+
+<p>// stats</p>
+
+<p>document.getElementById(&#39;statTotal&#39;).innerText = state.items.length;</p>
+
+<p>document.getElementById(&#39;statDone&#39;).innerText = state.items.filter(x=&gt;x.done).length;</p>
+
+<p>document.getElementById(&#39;statStreak&#39;).innerText = computeStreak();</p>
+
+<p>document.getElementById(&#39;score&#39;).innerText = state.score || 0;</p>
+
+<p>&nbsp;</p>
+
+<p>// badges</p>
+
+<p>const bd = document.getElementById(&#39;badges&#39;); bd.innerHTML=&#39;&#39;;</p>
+
+<p>for(const r of badgeRules){</p>
+
+<p>const has = (state.badges||[]).includes(r.id);</p>
+
+<p>const el = document.createElement(&#39;div&#39;); el.className=&#39;badge&#39;; el.style.opacity = has?1:0.45;</p>
+
+<p>el.title = r.desc;</p>
+
+<p>el.innerHTML = (has? &#39;<span style="font-family:&quot;Segoe UI Emoji&quot;,sans-serif">🏆</span> &#39; : &#39;<span style="font-family:&quot;Segoe UI Emoji&quot;,sans-serif">🔒</span> &#39;) + r.title + (r.need &amp;&amp; !r.kind ? ` &middot; ${r.need} пт` : &#39;&#39;);</p>
+
+<p>bd.appendChild(el);</p>
+
+<p>}</p>
+
+<p>&nbsp;</p>
+
+<p>// progress to next points badge</p>
+
+<p>const points = state.score||0;</p>
+
+<p>const nextRule = badgeRules.filter(r=&gt;!r.kind).sort((a,b)=&gt;a.need-b.need).find(r=&gt;points&lt;r.need);</p>
+
+<p>const progEl = document.getElementById(&#39;prog&#39;);</p>
+
+<p>if(nextRule){</p>
+
+<p>const pct = Math.min(100, Math.round((points / nextRule.need) * 100));</p>
+
+<p>progEl.style.width = pct + &#39;%&#39;;</p>
+
+<p>document.querySelector(&#39;.progress&#39;).title = `${points}/${nextRule.need} очков до &quot;${nextRule.title}&quot;`;</p>
+
+<p>} else {</p>
+
+<p>progEl.style.width = &#39;100%&#39;;</p>
+
+<p>document.querySelector(&#39;.progress&#39;).title = `Все бейджи по очкам получены`;</p>
+
+<p>}</p>
+
+<p>&nbsp;</p>
+
+<p>// calendar</p>
+
+<p>renderCalendar();</p>
+
+<p>&nbsp;</p>
+
+<p>}</p>
+
+<p>&nbsp;</p>
+
+<p>function renderCalendar(){</p>
+
+<p>const cal = document.getElementById(&#39;calendar&#39;); cal.innerHTML=&#39;&#39;;</p>
+
+<p>const now = new Date();</p>
+
+<p>const year = now.getFullYear(), month = now.getMonth();</p>
+
+<p>const first = new Date(year, month, 1);</p>
+
+<p>const startDay = first.getDay(); // 0..6 (Sun..Sat)</p>
+
+<p>const offset = (startDay+6)%7; // shift to mon start</p>
+
+<p>const daysInMonth = new Date(year, month+1, 0).getDate();</p>
+
+<p>document.getElementById(&#39;monthLabel&#39;).innerText = first.toLocaleString(&#39;ru&#39;,{month:&#39;long&#39;, year:&#39;numeric&#39;});</p>
+
+<p>const doneByDay = {};</p>
+
+<p>for(const it of state.items.filter(i=&gt;i.done)){</p>
+
+<p>doneByDay[it.date] = (doneByDay[it.date]||0)+1;</p>
+
+<p>}</p>
+
+<p>// create empty leading</p>
+
+<p>for(let i=0;i&lt;offset;i++){ const d = document.createElement(&#39;div&#39;); d.className=&#39;cal-day&#39;; d.innerHTML=&#39;&#39;; cal.appendChild(d); }</p>
+
+<p>for(let day=1; day&lt;=daysInMonth; day++){</p>
+
+<p>const iso = `${year}-${String(month+1).padStart(2,&#39;0&#39;)}-${String(day).padStart(2,&#39;0&#39;)}`;</p>
+
+<p>const cnt = doneByDay[iso] || 0;</p>
+
+<p>const d = document.createElement(&#39;div&#39;); d.className=&#39;cal-day&#39;;</p>
+
+<p>d.innerHTML = `&lt;div style=&quot;display:flex;align-items:center;justify-content:space-between&quot;&gt;&lt;div&gt;${day}&lt;/div&gt;${cnt?&#39;&lt;div class=&quot;dot&quot;&gt;&lt;/div&gt;&#39;:&#39;&#39;}&lt;/div&gt;</p>
+
+<p>&lt;div style=&quot;display:flex;flex-direction:column;gap:4px&quot;&gt;${cnt?&#39;&lt;div class=&quot;small&quot;&gt;&#39;+cnt+&#39; выполнено&lt;/div&gt;&#39;:&#39;&#39;}&lt;/div&gt;`;</p>
+
+<p>cal.appendChild(d);</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>&nbsp;</p>
+
+<p>function escapeHtml(s){ if(!s) return &#39;&#39;; return s.replaceAll(&#39;&amp;&#39;,&#39;&amp;amp;&#39;).replaceAll(&#39;&lt;&#39;,&#39;&amp;lt;&#39;).replaceAll(&#39;&gt;&#39;,&#39;&amp;gt;&#39;); }</p>
+
+<p>&nbsp;</p>
+
+<p>/* init UI handlers */</p>
+
+<p>document.getElementById(&#39;add&#39;).addEventListener(&#39;click&#39;, ()=&gt;{</p>
+
+<p>const title = document.getElementById(&#39;title&#39;).value.trim();</p>
+
+<p>if(!title) return alert(&#39;Введите название&#39;);</p>
+
+<p>const desc = document.getElementById(&#39;desc&#39;).value.trim();</p>
+
+<p>const category = document.getElementById(&#39;category&#39;).value;</p>
+
+<p>const tags = parseTags(document.getElementById(&#39;tags&#39;).value);</p>
+
+<p>const pts = Math.max(1, Number(document.getElementById(&#39;pts&#39;).value)||1);</p>
+
+<p>const date = document.getElementById(&#39;date&#39;).value || todayISO();</p>
+
+<p>addItem({title,desc,category,tags,pts,date});</p>
+
+<p>// clear quick fields</p>
+
+<p>document.getElementById(&#39;title&#39;).value=&#39;&#39;; document.getElementById(&#39;desc&#39;).value=&#39;&#39;; document.getElementById(&#39;tags&#39;).value=&#39;&#39;;</p>
+
+<p>});</p>
+
+<p>document.getElementById(&#39;addQuick&#39;).addEventListener(&#39;click&#39;, ()=&gt;{</p>
+
+<p>const title = document.getElementById(&#39;title&#39;).value.trim() || &#39;Ачивка сегодня&#39;;</p>
+
+<p>const pts = Number(document.getElementById(&#39;pts&#39;).value)||10;</p>
+
+<p>addItem({title,desc:&#39;&#39;,category:document.getElementById(&#39;category&#39;).value,tags:[],pts,date:todayISO()});</p>
+
+<p>});</p>
+
+<p>document.getElementById(&#39;search&#39;).addEventListener(&#39;input&#39;, render);</p>
+
+<p>document.getElementById(&#39;filterCat&#39;).addEventListener(&#39;change&#39;, render);</p>
+
+<p>document.getElementById(&#39;sortBy&#39;).addEventListener(&#39;change&#39;, render);</p>
+
+<p>document.getElementById(&#39;clearDone&#39;).addEventListener(&#39;click&#39;, ()=&gt;{ if(confirm(&#39;Удалить все выполненные ачивки?&#39;)) { clearDone(); }});</p>
+
+<p>document.getElementById(&#39;btnExport&#39;).addEventListener(&#39;click&#39;, exportJSON);</p>
+
+<p>document.getElementById(&#39;btnImport&#39;).addEventListener(&#39;click&#39;, ()=&gt; document.getElementById(&#39;fileInput&#39;).click());</p>
+
+<p>document.getElementById(&#39;fileInput&#39;).addEventListener(&#39;change&#39;, (e)=&gt;{ const f = e.target.files[0]; if(f) importJSON(f); e.target.value=&#39;&#39;; });</p>
+
+<p>document.getElementById(&#39;quickRun&#39;).addEventListener(&#39;click&#39;, ()=&gt; addItem({title:&#39;Пробежать 5к&#39;,desc:&#39;Быстрая пробежка&#39;,category:&#39;Фитнес&#39;,tags:[&#39;утро&#39;],pts:10,date:todayISO()}));</p>
+
+<p>document.getElementById(&#39;quickRead&#39;).addEventListener(&#39;click&#39;, ()=&gt; addItem({title:&#39;Читать 30 мин&#39;,desc:&#39;Время чтения&#39;,category:&#39;Учёба&#39;,tags:[&#39;вечер&#39;],pts:8,date:todayISO()}));</p>
+
+<p>document.getElementById(&#39;resetBtn&#39;).addEventListener(&#39;click&#39;, ()=&gt;{ if(confirm(&#39;Сбросить все данные? Это действие необратимо.&#39;)){ state={items:[],score:0,badges:[],createdAt:new Date().toISOString()}; save(); render(); } });</p>
+
+<p>&nbsp;</p>
+
+<p>/* initial load */</p>
+
+<p>load();</p>
+
+<p>recalc();</p>
+
+<p>render();</p>
+
+<p>&nbsp;</p>
+
+<p>/* accessibility: handle enter in title to add */</p>
+
+<p>document.getElementById(&#39;title&#39;).addEventListener(&#39;keydown&#39;, (e)=&gt;{ if(e.key===&#39;Enter&#39;){ document.getElementById(&#39;add&#39;).click(); } });</p>
+
+<p>&lt;/script&gt;</p>
+
+<p>&lt;/body&gt;</p>
+
+<p>&lt;/html&gt;</p>
+</body>
+</html>
